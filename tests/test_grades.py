@@ -6,6 +6,7 @@ from grades import (
     calculate_average,
     calculate_gpa,
     is_passing,
+    get_passing_percentage,
     get_student_summary,
 )
 
@@ -51,6 +52,31 @@ def test_is_passing_invalid_above_100():
 def test_is_passing_invalid_negative():
     with pytest.raises(ValueError):
         is_passing(-10)
+
+
+# ── get_passing_percentage ─────────────────────────────────────────────────
+
+def test_get_passing_percentage_all_passing():
+    assert get_passing_percentage([75, 80, 90]) == 100.0
+
+def test_get_passing_percentage_half_passing():
+    assert get_passing_percentage([75, 50, 80, 40]) == 50.0
+
+def test_get_passing_percentage_none_passing():
+    assert get_passing_percentage([50, 40, 55]) == 0.0
+
+def test_get_passing_percentage_with_boundary():
+    assert get_passing_percentage([60, 59, 70]) == 66.67
+
+def test_get_passing_percentage_single_passing():
+    assert get_passing_percentage([60]) == 100.0
+
+def test_get_passing_percentage_single_failing():
+    assert get_passing_percentage([59]) == 0.0
+
+def test_get_passing_percentage_empty_list_raises():
+    with pytest.raises(ValueError):
+        get_passing_percentage([])
 
 
 # ── calculate_average ──────────────────────────────────────────────────────
