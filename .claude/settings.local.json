@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pytest test_grades_6_12.py::test_is_passing -v)"
+    ]
+  }
+}
