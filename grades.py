@@ -98,6 +98,24 @@ def is_passing(score: float) -> bool:
     return score >= 60
 
 
+def get_passing_percentage(scores: list[float]) -> float:
+    """Calculate the percentage of passing scores in a list.
+
+    Args:
+        scores: List of numeric scores to evaluate.
+
+    Returns:
+        Percentage of passing scores (0-100) rounded to 2 decimal places.
+
+    Raises:
+        ValueError: If scores list is empty.
+    """
+    if not scores:
+        raise ValueError("scores list cannot be empty")
+    passing_count = sum(1 for score in scores if is_passing(score))
+    return round((passing_count / len(scores)) * 100, 2)
+
+
 def get_student_summary(student_name: str, scores: list[float]) -> str:
     """Generate a formatted academic summary for a student.
 
